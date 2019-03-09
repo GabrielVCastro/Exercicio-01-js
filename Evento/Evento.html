@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <title>13° Aula js</title>
+    <style>
+      #jogador{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: #00f;
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+    <script>
+      var jog, vel, dx, dy, px, py, anima, cont=false
+
+      function inicia(){
+          vel=5
+          dx=1
+          dy=0
+          px=0
+          py=0
+          jog=document.getElementById("jogador")
+          jog.addEventListener("click", function(){
+            if (cont==false) {
+                game()
+                cont=true
+            }else{
+              cancelAnimationFrame(anima)
+              cont=false
+            }
+          })
+          iniciar = document.getElementById("iniciar")
+          iniciar.addEventListener("click", function(){
+              game()
+
+          })
+
+
+          parar = document.getElementById('parar')
+          parar.addEventListener('click', function(){
+            cancelAnimationFrame(anima)
+
+
+          })
+
+
+
+      }
+
+      function game(){
+        px+=(dx*vel)
+      //  py+=(dy*vel)
+
+        jog.style.left = px+"px"
+      //  jog.syle.top = py+"px"
+
+        if (px>800) {
+          dx=-1
+        }else if (px<0){
+          dx=1
+        }
+
+        anima = requestAnimationFrame(game)
+      }
+
+      window.addEventListener("load", inicia)
+    </script>
+  </head>
+  <body>
+    <div id="jogador">
+
+    </div><br><br><br><br>
+    <button id="iniciar">iniciar</button>
+    <button id="parar">parar</button>
+  </body>
+</html>
