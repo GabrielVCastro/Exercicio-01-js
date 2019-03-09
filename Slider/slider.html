@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Aula 14° de js</title>
+  </head>
+  <style>
+    #dvslider{
+      width: 1000px;
+      height: 300px;
+      border: 1px solid #000;
+    }
+  </style>
+  <script type="text/javascript">
+    var imgs = [], slider
+    var imgAtual=0, maxImg, tempoTroca
+    function preCarregar(){
+      var s=1;
+      for( var i=0; i<3; i++){
+        imgs[i] = new Image();
+        imgs[i].src="img/imagem-"+s+".png"
+        s++
+      }
+    }
+
+    function carregarImg(img) {
+      slider.style.backgroundImage="url('"+imgs[img].src+"')"
+    }
+
+    function inicia(){
+      preCarregar()
+      imgAtual =0
+      maxImg= imgs.length-1
+      slider= document.getElementById("dvslider")
+      carregarImg(imgAtual)
+      tempoTroca = 1500
+      tmp = setInterval(troca,tempoTroca)
+
+    }
+
+    function troca(){
+      imgAtual++
+      if(imgAtual>maxImg){
+        imgAtual=0
+      }
+      carregarImg(imgAtual)
+    }
+
+
+    function passa(){
+
+      preCarregar()
+
+      maxImg= imgs.length
+      slider= document.getElementById("dvslider")
+      if (imgAtual==maxImg) {
+        imgAtual=0
+        carregarImg(imgAtual)
+      }else{
+        carregarImg(imgAtual)
+      }
+      imgAtual++
+      console.log(imgAtual)
+
+    }
+
+    function voltar(){
+      preCarregar()
+      console.log(imgs)
+      maxImg= imgs.length
+      slider = document.getElementById("dvslider")
+      if (imgAtual<0) {
+        imgAtual=0
+      }
+
+      carregarImg(imgAtual)
+      if (imgAtual==0) {
+        imgAtual=2
+      }else{
+        imgAtual--
+      }
+console.log(imgAtual)
+    }
+
+    //window.addEventListener('load', inicia)
+  </script>
+  <body>
+
+    <div id="dvslider">
+
+    </div>
+
+    <button  onclick="passa()">Passar</button>&nbsp;&nbsp;<button onclick="voltar()">Voltar</button>
+  </body>
+</html>
