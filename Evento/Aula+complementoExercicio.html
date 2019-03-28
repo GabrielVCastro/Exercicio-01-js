@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Aula 16° de javascript</title>
+    <style>
+      #carro{
+        width: 200px;
+        height: 379px;
+        position: absolute;
+        left: 0px;
+        top: 50px;
+      }
+      .c1{
+        background-image: url("img/img-1.png");
+        background-size: 100% 100%
+      }
+      .c2{
+        background-image: url("img/img-2.png");
+        background-size: 100% 100%
+      }
+      .c3{
+        background-image: url("img/img-3.png");
+        background-size: 100% 100%
+      }
+    </style>
+    <script type="text/javascript">
+    var mx=0
+    var my=50
+      function trocaCarro(c){
+        var obj =document.getElementById("carro")
+
+        if(c==1){
+            obj.setAttribute("class", "c1")
+        }else if (c==2) {
+          obj.setAttribute("class", "c2")
+        }else if (c==3) {
+          obj.setAttribute("class", "c3")
+        }
+      }
+
+      function removeAtr(){
+        var obj = document.getElementById("carro")
+        obj.removeAttribute("class")
+        mx = 0
+        my = 50
+        obj.style.left = mx+"px"
+        obj.style.top = my+"px"
+      }
+
+      function verificar(){
+        var obj = document.getElementById("carro")
+        if (obj.hasAttribute("class")) {
+            alert("Atributo ON")
+        }else{
+          alert("Atributo OFF")
+          //var valor = Math.floor(Math.random()*3)
+          //trocaCarro(valor)
+        }
+      }
+
+      function movimentaCarro(){
+        var obj = document.getElementById("carro")
+        obj.addEventListener("click", function(){
+          document.addEventListener("keydown",move)
+        })
+      }
+
+      function move(){
+        var obj = document.getElementById("carro")
+        var tecla = event.keyCode
+        console.log(tecla)
+        if (tecla==37) {
+            mx-=10
+            obj.style.left=mx+"px"
+        }else if(tecla==38){
+            my-=10
+            obj.style.top=my+"px"
+        }else if(tecla==39){
+            mx+=10
+            obj.style.left=mx+"px"
+        }else if(tecla==40){
+            my+=10
+            obj.style.top=my+"px"
+        }
+      }
+
+      window.addEventListener("load", movimentaCarro)
+    </script>
+  </head>
+
+  <body>
+    <button onclick="trocaCarro(1)">carro-1</button>
+    <button onclick="trocaCarro(2)">carro-2</button>
+    <button onclick="trocaCarro(3)">carro-3</button>
+    <button onclick="removeAtr()">Remover carro</button>
+    <button onclick="verificar()">Verificar</button>
+    <div id="carro">
+
+    </div>
+
+  </body>
+</html>
