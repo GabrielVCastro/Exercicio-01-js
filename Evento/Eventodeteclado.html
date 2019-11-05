@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <title>9° Aula js | Exercicio</title>
+    <style>
+      #dv1{
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        background-color: #f00;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+      }
+
+    </style>
+    <script type="text/javascript">
+      var px=0
+      var py=0
+      var alerta = false 
+      function eventos(){
+        var obj = document.getElementById("dv1")
+        
+        obj.addEventListener("click",function(event){
+            if(alerta==true){
+              alert("Evento já foi iniciado")
+            }else{
+              alert("Evento iniciado")
+              alerta=true
+              obj.style.backgroundColor="#fff"
+              
+            }
+        })
+
+      }
+
+      function move(){
+        var obj = document.getElementById("dv1")
+        var tecla = event.keyCode
+        if (tecla==37) {
+
+            if(px<=0){
+              alert("nao pode se mover para essa direção")
+              px=0
+              obj.style.left=px+"px"
+            }else{
+              px-=10
+              obj.style.left=px+"px"
+            }
+
+        }else if(tecla==38){
+
+            if(py<=0){
+              alert("nao pode se mover para essa direção")
+              py=0
+              obj.style.top=py+"px"
+            }else{
+              py-=10
+              obj.style.top=py+"px"
+            }
+
+        }else if(tecla==39){
+
+          if(px>=1300){
+              alert("nao pode se mover mais que isso")
+              px=1299
+              obj.style.left=px+"px"
+            }else{
+              px+=10
+            obj.style.left=px+"px"  
+            }
+            
+        }else if(tecla==40){
+
+          if(py>=1300){
+            alert("nao pode se mover mais que isso")
+              py=1299
+              obj.style.top=py+"px"
+            }else{
+              py+=10
+              obj.style.top=py+"px"
+            }
+            
+        }else if(tecla==13){
+          if(alerta==false){
+            alert("Evento já esta removido")
+          }else{
+            alerta=false
+            alert("Evento removido")
+            obj.style.backgroundColor="#f00"
+            document.removeEventListener("keydown", move) 
+          } 
+        }
+      }
+      window.addEventListener("keydown",move)
+      window.addEventListener("load", eventos)
+    </script>
+
+  </head>
+  <body>
+
+    <div id="dv1" on>
+
+    </div>
+
+  </body>
+</html>
